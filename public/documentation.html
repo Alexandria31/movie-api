@@ -7,82 +7,173 @@
 <style>
 body {
 font-family: Arial, sans-serif;
-margin: 20px;
 line-height: 1.6;
+margin: 20px;
 }
-h1, h2 {
+h1 {
 color: #333;
 }
-pre {
-background-color: #f4f4f4;
-padding: 10px;
-border-radius: 5px;
+h2 {
+color: #555;
 }
-code {
-background-color: #eaeaea;
-padding: 2px 4px;
-border-radius: 3px;
+pre {
+background: #f4f4f4;
+padding: 10px;
+border: 1px solid #ddd;
 }
 </style>
 </head>
 <body>
 <h1>Movie API Documentation</h1>
-<p>This API allows you to manage a list of movies, providing endpoints for creating, retrieving, updating, and deleting movie records.</p>
 
 <h2>Base URL</h2>
-<p><code>http://localhost:3000</code></p>
+<p><strong>http://localhost:3000</strong></p>
 
 <h2>Endpoints</h2>
 
-<h3>1. Get All Movies</h3>
-<p><strong>Method:</strong> GET</p>
-<p><strong>Endpoint:</strong> /movies</p>
-<p><strong>Description:</strong> Retrieve a list of all movies.</p>
-<pre><code>GET /movies</code></pre>
+<h3>1. Movies</h3>
+<p>Manage movies in the database.</p>
 
-<h3>2. Get a Movie by ID</h3>
-<p><strong>Method:</strong> GET</p>
-<p><strong>Endpoint:</strong> /movies/:id</p>
-<p><strong>Description:</strong> Retrieve a specific movie by its ID.</p>
-<pre><code>GET /movies/1</code></pre>
-
-<h3>3. Add a New Movie</h3>
-<p><strong>Method:</strong> POST</p>
-<p><strong>Endpoint:</strong> /movies</p>
-<p><strong>Description:</strong> Add a new movie to the list.</p>
-<p><strong>Request Body:</strong></p>
-<pre><code>{
+<h4>Get All Movies</h4>
+<pre>
+<strong>GET</strong> /movies
+</pre>
+<p>Returns a list of all movies.</p>
+<p><strong>Response:</strong></p>
+<pre>
+[
+{
+"id": 1,
+"title": "Inception",
+"director": "Christopher Nolan",
+"year": 2010,
+"genre": "Sci-Fi"
+},
+{
+"id": 2,
+"title": "The Matrix",
+"director": "Lana Wachowski, Lilly Wachowski",
+"year": 1999,
+"genre": "Action"
+},
+{
+"id": 3,
 "title": "Interstellar",
 "director": "Christopher Nolan",
-"year": 2014
-}</code></pre>
+"year": 2014,
+"genre": "Adventure"
+}
+]
+</pre>
 
-<h3>4. Update a Movie</h3>
-<p><strong>Method:</strong> PUT</p>
-<p><strong>Endpoint:</strong> /movies/:id</p>
-<p><strong>Description:</strong> Update an existing movie by its ID.</p>
-<p><strong>Request Body:</strong></p>
-<pre><code>{
-"title": "Inception (Updated)",
+<h4>Get a Specific Movie</h4>
+<pre>
+<strong>GET</strong> /movies/:id
+</pre>
+<p>Returns details of a specific movie by ID.</p>
+<p><strong>Response:</strong></p>
+<pre>
+{
+"id": 1,
+"title": "Inception",
 "director": "Christopher Nolan",
-"year": 2010
-}</code></pre>
+"year": 2010,
+"genre": "Sci-Fi"
+}
+</pre>
+<p><strong>404 Error:</strong> Movie not found if the ID does not exist.</p>
 
-<h3>5. Delete a Movie</h3>
-<p><strong>Method:</strong> DELETE</p>
-<p><strong>Endpoint:</strong> /movies/:id</p>
-<p><strong>Description:</strong> Delete a movie by its ID.</p>
-<pre><code>DELETE /movies/1</code></pre>
+<h3>2. Users</h3>
+<p>Manage users in the database.</p>
 
-<h2>Response Codes</h2>
-<ul>
-<li><strong>200 OK:</strong> Successful request</li>
-<li><strong>201 Created:</strong> New resource has been created</li>
-<li><strong>204 No Content:</strong> Successful deletion</li>
-<li><strong>404 Not Found:</strong> Resource not found</li>
-</ul>
+<h4>Get User by ID</h4>
+<pre>
+<strong>GET</strong> /users/:id
+</pre>
+<p>Returns details of a specific user by ID.</p>
+<p><strong>Response:</strong></p>
+<pre>
+{
+"username": "john_doe",
+"dob": "1990-01-01",
+"email": "john_doe@example.com",
+"password": "securepassword123",
+"favoriteMovies": ["Inception", "The Matrix", "Interstellar"]
+}
+</pre>
+<p><strong>404 Error:</strong> User not found if the ID does not exist.</p>
+
+<h4>Add a New User</h4>
+<pre>
+<strong>POST</strong> /users
+</pre>
+<p>Creates a new user with the following body:</p>
+<pre>
+{
+"username": "new_user",
+"dob": "1995-05-05",
+"email": "new_user@example.com",
+"password": "newpassword123"
+}
+</pre>
+<p><strong>Response:</strong></p>
+<pre>
+{
+"username": "new_user",
+"dob": "1995-05-05",
+"email": "new_user@example.com",
+"password": "newpassword123",
+"favoriteMovies": []
+}
+</pre>
+
+<h4>Update User</h4>
+<pre>
+<strong>PUT</strong> /users/:id
+</pre>
+<p>Updates details of a specific user by ID with the following body:</p>
+<pre>
+{
+"username": "updated_user",
+"dob": "1990-01-01",
+"email": "updated_user@example.com",
+"password": "updatedpassword123"
+}
+</pre>
+<p><strong>Response:</strong> Returns updated user details.</p>
+
+<h4>Add a Movie to Favorites</h4>
+<pre>
+<strong>POST</strong> /users/:id/favorites
+</pre>
+<p>Adds a movie to the user's favorites with the following body:</p>
+<pre>
+{
+"movie": "Inception"
+}
+</pre>
+<p><strong>Response:</strong> Confirmation message.</p>
+
+<h4>Remove a Movie from Favorites</h4>
+<pre>
+<strong>DELETE</strong> /users/:id/favorites
+</pre>
+<p>Removes a movie from the user's favorites with the following body:</p>
+<pre>
+{
+"movie": "Inception"
+}
+</pre>
+<p><strong>Response:</strong> Confirmation message.</p>
+
+<h2>Default Route</h2>
+<pre>
+<strong>GET</strong> /
+</pre>
+<p>Returns a welcome message.</p>
+<p><strong>Response:</strong> "Welcome to the Movie API"</p>
 
 <h2>Notes</h2>
-<p>Make sure to validate the input data when implementing a real API.</p>
+<p>Ensure to replace <code>:id</code> with the actual user or movie ID when making requests.</p>
 </body>
 </html>
