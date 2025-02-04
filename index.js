@@ -135,6 +135,16 @@ app.put("/users/:id", (req, res) => {
   res.send(user);
 });
 
+// DELETE to deregister (remove) a user
+app.delete("/users/:id", (req, res) => {
+  const userId = parseInt(req.params.id) - 1; // Assuming IDs start from 1
+  if (userId < 0 || userId >= users.length)
+    return res.status(404).send("User not found");
+
+  const deletedUser = users.splice(userId, 1);
+  res.send(`User ${deletedUser[0].username} has been deregistered.`);
+});
+
 // POST to add a movie to favorites
 app.post("/users/:id/favorites", (req, res) => {
   const user = users[parseInt(req.params.id) - 1];

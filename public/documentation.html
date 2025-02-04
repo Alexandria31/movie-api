@@ -196,6 +196,18 @@
     >
     <p><strong>Response:</strong> Returns updated user details.</p>
 
+    <h4>Deregister User</h4>
+    <pre>
+<strong>DELETE</strong> /users/:id
+</pre>
+    <p>Removes a user from the database by ID.</p>
+    <p><strong>Response:</strong></p>
+    <pre>
+"User john_doe has been deregistered."
+</pre
+    >
+    <p><strong>404 Error:</strong> User not found if the ID does not exist.</p>
+
     <h4>Add a Movie to Favorites</h4>
     <pre>
 <strong>POST</strong> /users/:id/favorites
