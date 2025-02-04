@@ -1,98 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Movie API Documentation</title>
-<style>
-body {
-font-family: Arial, sans-serif;
-line-height: 1.6;
-margin: 20px;
-}
-h1 {
-color: #333;
-}
-h2 {
-color: #555;
-}
-pre {
-background: #f4f4f4;
-padding: 10px;
-border: 1px solid #ddd;
-}
-</style>
-</head>
-<body>
-<h1>Movie API Documentation</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie API Documentation</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 20px;
+      }
+      h1 {
+        color: #333;
+      }
+      h2 {
+        color: #555;
+      }
+      pre {
+        background: #f4f4f4;
+        padding: 10px;
+        border: 1px solid #ddd;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Movie API Documentation</h1>
 
-<h2>Base URL</h2>
-<p><strong>http://localhost:3000</strong></p>
+    <h2>Base URL</h2>
+    <p><strong>http://localhost:3000</strong></p>
 
-<h2>Endpoints</h2>
+    <h2>Endpoints</h2>
 
-<h3>1. Movies</h3>
-<p>Manage movies in the database.</p>
+    <h3>1. Movies</h3>
+    <p>Manage movies in the database.</p>
 
-<h4>Get All Movies</h4>
-<pre>
+    <h4>Get All Movies</h4>
+    <pre>
 <strong>GET</strong> /movies
 </pre>
-<p>Returns a list of all movies.</p>
-<p><strong>Response:</strong></p>
-<pre>
+    <p>Returns a list of all movies.</p>
+    <p><strong>Response:</strong></p>
+    <pre>
 [
 {
 "id": 1,
 "title": "Inception",
 "director": "Christopher Nolan",
 "year": 2010,
-"genre": "Sci-Fi"
+"genre": "Sci-Fi",
+"directorDOB": "1970-07-30"
 },
 {
 "id": 2,
 "title": "The Matrix",
 "director": "Lana Wachowski, Lilly Wachowski",
 "year": 1999,
-"genre": "Action"
+"genre": "Action",
+"directorDOB": "1965-06-21"
+}
+]
+</pre
+    >
+
+    <h4>Get a Specific Movie</h4>
+    <pre>
+<strong>GET</strong> /movies/:id
+</pre>
+    <p>Returns details of a specific movie by ID.</p>
+    <p><strong>Response:</strong></p>
+    <pre>
+{
+"id": 1,
+"title": "Inception",
+"director": "Christopher Nolan",
+"year": 2010,
+"genre": "Sci-Fi",
+"directorDOB": "1970-07-30"
+}
+</pre
+    >
+    <p><strong>404 Error:</strong> Movie not found if the ID does not exist.</p>
+
+    <h4>Get Movies by Genre</h4>
+    <pre>
+<strong>GET</strong> /movies/genre/:genre
+</pre>
+    <p>Returns all movies that belong to a specific genre.</p>
+    <p><strong>Response:</strong></p>
+    <pre>
+[
+{
+"id": 1,
+"title": "Inception",
+"director": "Christopher Nolan",
+"year": 2010,
+"genre": "Sci-Fi",
+"directorDOB": "1970-07-30"
+}
+]
+</pre
+    >
+    <p><strong>404 Error:</strong> No movies found for the specified genre.</p>
+
+    <h4>Get Movies by Director</h4>
+    <pre>
+<strong>GET</strong> /movies/director/:director
+</pre>
+    <p>Returns all movies directed by a specific director.</p>
+    <p><strong>Response:</strong></p>
+    <pre>
+[
+{
+"id": 1,
+"title": "Inception",
+"director": "Christopher Nolan",
+"year": 2010,
+"genre": "Sci-Fi",
+"directorDOB": "1970-07-30"
 },
 {
 "id": 3,
 "title": "Interstellar",
 "director": "Christopher Nolan",
 "year": 2014,
-"genre": "Adventure"
+"genre": "Adventure",
+"directorDOB": "1970-07-30"
 }
 ]
-</pre>
+</pre
+    >
+    <p>
+      <strong>404 Error:</strong> No movies found for the specified director.
+    </p>
 
-<h4>Get a Specific Movie</h4>
-<pre>
-<strong>GET</strong> /movies/:id
-</pre>
-<p>Returns details of a specific movie by ID.</p>
-<p><strong>Response:</strong></p>
-<pre>
-{
-"id": 1,
-"title": "Inception",
-"director": "Christopher Nolan",
-"year": 2010,
-"genre": "Sci-Fi"
-}
-</pre>
-<p><strong>404 Error:</strong> Movie not found if the ID does not exist.</p>
+    <h3>2. Users</h3>
+    <p>Manage users in the database.</p>
 
-<h3>2. Users</h3>
-<p>Manage users in the database.</p>
-
-<h4>Get User by ID</h4>
-<pre>
+    <h4>Get User by ID</h4>
+    <pre>
 <strong>GET</strong> /users/:id
 </pre>
-<p>Returns details of a specific user by ID.</p>
-<p><strong>Response:</strong></p>
-<pre>
+    <p>Returns details of a specific user by ID.</p>
+    <p><strong>Response:</strong></p>
+    <pre>
 {
 "username": "john_doe",
 "dob": "1990-01-01",
@@ -100,24 +150,26 @@ border: 1px solid #ddd;
 "password": "securepassword123",
 "favoriteMovies": ["Inception", "The Matrix", "Interstellar"]
 }
-</pre>
-<p><strong>404 Error:</strong> User not found if the ID does not exist.</p>
+</pre
+    >
+    <p><strong>404 Error:</strong> User not found if the ID does not exist.</p>
 
-<h4>Add a New User</h4>
-<pre>
+    <h4>Add a New User</h4>
+    <pre>
 <strong>POST</strong> /users
 </pre>
-<p>Creates a new user with the following body:</p>
-<pre>
+    <p>Creates a new user with the following body:</p>
+    <pre>
 {
 "username": "new_user",
 "dob": "1995-05-05",
 "email": "new_user@example.com",
 "password": "newpassword123"
 }
-</pre>
-<p><strong>Response:</strong></p>
-<pre>
+</pre
+    >
+    <p><strong>Response:</strong></p>
+    <pre>
 {
 "username": "new_user",
 "dob": "1995-05-05",
@@ -125,55 +177,63 @@ border: 1px solid #ddd;
 "password": "newpassword123",
 "favoriteMovies": []
 }
-</pre>
+</pre
+    >
 
-<h4>Update User</h4>
-<pre>
+    <h4>Update User</h4>
+    <pre>
 <strong>PUT</strong> /users/:id
 </pre>
-<p>Updates details of a specific user by ID with the following body:</p>
-<pre>
+    <p>Updates details of a specific user by ID with the following body:</p>
+    <pre>
 {
 "username": "updated_user",
 "dob": "1990-01-01",
 "email": "updated_user@example.com",
 "password": "updatedpassword123"
 }
-</pre>
-<p><strong>Response:</strong> Returns updated user details.</p>
+</pre
+    >
+    <p><strong>Response:</strong> Returns updated user details.</p>
 
-<h4>Add a Movie to Favorites</h4>
-<pre>
+    <h4>Add a Movie to Favorites</h4>
+    <pre>
 <strong>POST</strong> /users/:id/favorites
 </pre>
-<p>Adds a movie to the user's favorites with the following body:</p>
-<pre>
+    <p>Adds a movie to the user's favorites with the following body:</p>
+    <pre>
 {
 "movie": "Inception"
 }
-</pre>
-<p><strong>Response:</strong> Confirmation message.</p>
+</pre
+    >
+    <p><strong>Response:</strong> Confirmation message.</p>
 
-<h4>Remove a Movie from Favorites</h4>
-<pre>
+    <h4>Remove a Movie from Favorites</h4>
+    <pre>
 <strong>DELETE</strong> /users/:id/favorites
 </pre>
-<p>Removes a movie from the user's favorites with the following body:</p>
-<pre>
+    <p>Removes a movie from the user's favorites with the following body:</p>
+    <pre>
 {
 "movie": "Inception"
 }
-</pre>
-<p><strong>Response:</strong> Confirmation message.</p>
+</pre
+    >
+    <p><strong>Response:</strong> Confirmation message.</p>
 
-<h2>Default Route</h2>
-<pre>
+    <h2>Default Route</h2>
+    <pre>
 <strong>GET</strong> /
 </pre>
-<p>Returns a welcome message.</p>
-<p><strong>Response:</strong> "Welcome to the Movie API"</p>
+    <p>Returns a welcome message.</p>
+    <p><strong>Response:</strong> "Welcome to the Movie API"</p>
 
-<h2>Notes</h2>
-<p>Ensure to replace <code>:id</code> with the actual user or movie ID when making requests.</p>
-</body>
+    <h2>Notes</h2>
+    <p>
+      Ensure to replace <code>:id</code>, <code>:genre</code>, and
+      <code>:director</code> with the actual user ID, genre, or director name
+      when making requests.
+    </p>
+  </body>
 </html>
